@@ -1,11 +1,66 @@
+import Swiper from 'swiper';
+import { Scrollbar, Mousewheel } from 'swiper/modules';
 import AirDatepicker from 'air-datepicker';
-// import localeNl from 'air-datepicker/locale/nl';
-// import 'air-datepicker/air-datepicker.css';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  console.log('hello');
+  // OFFER SWIPER CODE
+  const BREAKPOINT = 991;
+  const DEBOUNCE_DELAY = 50;
 
+  const swiperArgs = {
+    modules: [Scrollbar, Mousewheel],
+    wrapperClass: 'ef_packages-wrapper',
+    slideClass: 'ef_package_component',
+    slidesPerView: 'auto',
+    speed: 300,
+    spaceBetween: 32,
+    a11y: true,
+    grabCursor: true,
+    keyboard: false,
+    mousewheel: { forceToAxis: true },
+    scrollbar: {
+      el: '.ef_packages-scrollbar',
+      dragClass: 'ef_packages-scrollbar-drag',
+      draggable: true,
+    },
+    on: {
+      beforeInit: (swiper) => {
+        swiper.wrapperEl.style.gridColumnGap = 'unset';
+      },
+    },
+  };
+
+  let packageSwiper = null;
+
+  const handleResize = () => {
+    const newWindowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+    if (newWindowWidth >= BREAKPOINT) {
+      if (!packageSwiper) {
+        packageSwiper = new Swiper('.ef_packages-container', swiperArgs);
+      } else {
+        packageSwiper.update();
+      }
+    } else if (packageSwiper) {
+      packageSwiper.destroy(true, true);
+      packageSwiper = null;
+    }
+  };
+
+  window.addEventListener('resize', debounce(handleResize, DEBOUNCE_DELAY));
+  handleResize();
+  // OFFER SWIPER CODE
+
+  // TOGGLE CLASS ON DROPDOWN
+  document
+    .querySelectorAll('.ef_toggle-dropdown_head')
+    .forEach((toggle) =>
+      toggle.addEventListener('click', (event) => event.currentTarget.classList.toggle('is-open'))
+    );
+  // TOGGLE CLASS ON DROPDOWN
+
+  // AIR DATAPICKER
   const localeNl = {
     days: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
     daysShort: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
@@ -45,23 +100,33 @@ window.Webflow.push(() => {
     firstDay: 1,
   };
 
-  new AirDatepicker('#geboortedatum', {
-    dateFormat: 'dd-MM-yyyy',
-    // visible: true,
-    maxDate: [new Date()],
-    locale: localeNl,
-    // inline: true,
+  const createDatepicker = (selector, options) => {
+    const field = document.querySelector(selector);
+    new AirDatepicker(field, {
+      ...options,
+      locale: localeNl,
+      dateFormat: 'dd-MM-yyyy',
+      onShow: () => field.classList.add('is-active'),
+      onHide: () => field.classList.remove('is-active'),
+    });
+  };
+
+  createDatepicker('#Birthday', {
+    maxDate: new Date(),
   });
 
-  new AirDatepicker('#startdatum', {
-    // inline: false,
-    // selectedDates: [new Date()],
-    dateFormat: 'dd-MM-yyyy',
-    // visible: true,
-    // container: '#datepicker-wrapper',
-    // // position: 'right center',
-    minDate: [new Date(new Date().setDate(new Date().getDate() + 20))],
-    maxDate: [new Date(new Date(new Date().setDate(1)).setMonth(new Date().getMonth() + 6))],
-    locale: localeNl,
+  createDatepicker('#startdatum', {
+    minDate: new Date(new Date().setDate(new Date().getDate() + 20)),
+    maxDate: new Date(new Date(new Date().setDate(1)).setMonth(new Date().getMonth() + 6)),
   });
+  // AIR DATAPICKER
 });
+
+// GENERIC DEBOUNCE FUNCTION
+function debounce(func, delay) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+}
