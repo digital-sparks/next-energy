@@ -7,7 +7,13 @@ const BUILD_DIRECTORY = 'dist';
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
 // Config entrypoint files
-const ENTRY_POINTS = ['src/index.js', 'src/styles.css', 'src/airdatepicker.css'];
+const ENTRY_POINTS = [
+  'src/step1.js',
+  'src/step2.js',
+  'src/step3.js',
+  'src/styles.css',
+  'src/airdatepicker.css',
+];
 
 // Config dev serving
 const LIVE_RELOAD = !PRODUCTION;

@@ -1,19 +1,13 @@
-/* SELECT INPUTS */
-select.ef_form-input {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-position: calc(100% - 1.25rem) 50% !important;
+  margin: 0;
 }
 
-select.ef_form-input.is-large {
-  background-position: calc(100% - 1.5rem) 50% !important;
+/* Remove arrows in Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
-
-select.ef_form-input.is-small {
-  background-position: calc(100% - 0.75rem) 50% !important;
-}
-/* SELECT INPUTS */
 
 /* FORM INPUTS */
 .ef_form-input:focus + .ef_form-label,
