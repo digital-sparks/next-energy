@@ -314,11 +314,11 @@ window.Webflow.push(() => {
   };
 
   // Create datepickers with specific options
-  createDatepicker('#Birthday', {
+  createDatepicker('#birthday', {
     maxDate: new Date(),
   });
 
-  createDatepicker('#startdatum', {
+  createDatepicker('#contract-startdate', {
     minDate: new Date(new Date().setDate(new Date().getDate() + 20)),
     maxDate: new Date(new Date(new Date().setDate(1)).setMonth(new Date().getMonth() + 6)),
   });

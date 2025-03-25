@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../bin/live-reload.js", "../src/revert.js"],
+  "sourcesContent": ["new EventSource(`${SERVE_ORIGIN}/esbuild`).addEventListener('change', () => location.reload());\n", "// // Clear form fields on page unload (before leaving)\n// window.addEventListener('beforeunload', function () {\n//   // Store a flag in sessionStorage\n//   sessionStorage.setItem('pageIsReloading', 'true');\n// });\n\n// When the page loads again\nwindow.addEventListener('popstate', function () {\n  // Check if we're returning to the page\n  //   if (sessionStorage.getItem('pageIsReloading')) {\n  document.querySelector('form').reset();\n  //     sessionStorage.removeItem('pageIsReloading');\n  //   }\n});\n"],
+  "mappings": ";;AAAA,MAAI,YAAY,GAAG,uBAAY,UAAU,EAAE,iBAAiB,UAAU,MAAM,SAAS,OAAO,CAAC;;;ACO7F,SAAO,iBAAiB,YAAY,WAAY;AAG9C,aAAS,cAAc,MAAM,EAAE,MAAM;AAAA,EAGvC,CAAC;",
+  "names": []
+}

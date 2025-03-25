@@ -7,11 +7,13 @@ input[type='number']::-webkit-inner-spin-button {
 /* Remove arrows in Firefox */
 input[type='number'] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* FORM INPUTS */
 .ef_form-input:focus + .ef_form-label,
-.ef_form-input:not(:placeholder-shown) + .ef_form-label,
+input.ef_form-input:not(:placeholder-shown) + .ef_form-label,
+select.ef_form-input:has(option:nth-child(n + 2):checked) + .ef_form-label,
 .ef_form-input.is-active + .ef_form-label {
   background-color: white;
   top: calc(-2.5%);
@@ -70,6 +72,20 @@ input[type='number'] {
   background-color: white;
 }
 
+.ef_form-input.is-success:not(:placeholder-shown) + .ef_form-label::after,
+.ef_form-input.is-success:focus + .ef_form-label::after {
+  background-color: #e3fff7;
+}
+
+.ef_form-input.is-sucess:not(:placeholder-shown):not(:focus):hover + .ef_form-label::after {
+  background-color: #e3fff7;
+}
+
+.ef_form-input.is-success:not(:placeholder-shown) + .ef_form-label,
+.ef_form-input.is-success:focus + .ef_form-label {
+  color: #00ba85;
+}
+
 /* FORM INPUTS */
 
 .ef_package_component:hover .w-form-formradioinput {
@@ -114,4 +130,25 @@ input[type='number'] {
   outline-offset: 0px;
   outline-width: 1px;
   outline-style: solid;
+}
+
+/* SELECT INPUTS */
+select.ef_form-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-position: calc(100% - 1.25rem) 50% !important;
+}
+
+select.ef_form-input.is-large {
+  background-position: calc(100% - 1.5rem) 50% !important;
+}
+
+select.ef_form-input.is-small {
+  background-position: calc(100% - 0.75rem) 50% !important;
+}
+/* SELECT INPUTS */
+
+.ef_package_detail-wrapper {
+  transition: 400ms grid-template-rows ease;
 }
