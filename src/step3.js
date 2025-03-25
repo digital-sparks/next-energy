@@ -44,8 +44,8 @@ window.Webflow.push(() => {
 
   const createDatepicker = (selector, options = {}) => {
     const field = document.querySelector(selector);
-    const isBirthdayField = selector === '#Birthday';
-    const isStartDatumField = selector === '#startdatum';
+    const isBirthdayField = selector === '#birthday';
+    const isStartDatumField = selector === '#contract-startdate';
 
     // Define error message IDs for each error type
     const ERROR_IDS = {
