@@ -8,6 +8,7 @@ const PRODUCTION = process.env.NODE_ENV === 'production';
 
 // Config entrypoint files
 const ENTRY_POINTS = [
+   'src/global.js',
   'src/step1.js',
   'src/step2.js',
   'src/step3.js',
